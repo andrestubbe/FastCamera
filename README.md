@@ -56,13 +56,22 @@ Unlike OpenCV or other computer vision frameworks that bundle hundreds of featur
 - **Picture Capture** — Take snapshots with SPACE key (PNG format)
 - **1080p@60fps** — High performance target
 
-## � Screenshot
+## 📋 API Reference
 
-![FastCamera GUI Screenshot](docs/screenshot.png)
+### Core Methods
 
-FastCamera GUI with live camera preview, FPS counter, and picture capture functionality.
+| Method | Description | Status |
+|--------|-------------|--------|
+| `enumerateDevices()` | List all cameras | ✅ Working |
+| `open(deviceId)` | Open camera by ID | ✅ Working |
+| `startCapture(w,h,fps)` | Start streaming | ✅ Working |
+| `getFrame()` | Get frame (blocking) | ✅ Working |
+| `startStream(w,h,fps)` | Zero-copy streaming | ✅ Working |
+| `hasNewFrame()` | Check for new frame | ✅ Working |
+| `stopCapture()` | Stop streaming | ✅ Working |
+| `close()` | Release camera | ✅ Working |
 
-## �� Installation
+## 📦 Installation
 
 ### Maven (JitPack)
 
@@ -150,6 +159,16 @@ camera.setListener((frame, width, height, timestamp) -> {
 });
 camera.startCapture(640, 480, 60);
 ```
+
+---
+
+## 📸 Screenshot
+
+![FastCamera GUI Screenshot](docs/screenshot.png)
+
+FastCamera GUI with live camera preview, FPS counter, and picture capture functionality.
+
+---
 
 ## 📋 API Reference
 
