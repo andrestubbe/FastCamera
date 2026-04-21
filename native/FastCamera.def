@@ -1,0 +1,22 @@
+LIBRARY fastcamera
+EXPORTS
+    ; Enumeration
+    Java_fastcamera_FastCamera_nativeEnumerateDevices
+    Java_fastcamera_FastCamera_nativeGetSupportedFormats
+    
+    ; Capture Control
+    Java_fastcamera_FastCamera_nativeOpen
+    Java_fastcamera_FastCamera_nativeStartCapture
+    Java_fastcamera_FastCamera_nativeStopCapture
+    Java_fastcamera_FastCamera_nativeClose
+    
+    ; Frame Access
+    Java_fastcamera_FastCamera_nativeGetFrame
+    Java_fastcamera_FastCamera_nativeStartStream
+    Java_fastcamera_FastCamera_nativeHasNewFrame
+    Java_fastcamera_FastCamera_nativeLockFrame
+    Java_fastcamera_FastCamera_nativeUnlockFrame
+    
+    ; Properties
+    Java_fastcamera_FastCamera_nativeSetProperty
+    Java_fastcamera_FastCamera_nativeGetProperty

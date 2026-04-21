@@ -1,0 +1,47 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+.vscode/
+*.swp
+*.swo
+*~
+
+# Compiled
+*.class
+*.jar
+*.war
+*.ear
+*.dll
+*.exe
+
+# Native build
+native/*.obj
+native/*.lib
+native/*.exp
+native/*.pdb
+native/*.ilk
+build/
+out/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project specific
+*.tmp
+*.temp
