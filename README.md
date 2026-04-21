@@ -8,6 +8,8 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%207+-lightgrey.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+![FastCamera GUI Screenshot](docs/screenshot.png)
+
 > **Native camera access** for Java applications — Hardware-accelerated capture with automatic backend selection.
 
 FastCamera provides **triple-backend camera capture** for Java:
@@ -159,14 +161,6 @@ camera.setListener((frame, width, height, timestamp) -> {
 });
 camera.startCapture(640, 480, 60);
 ```
-
----
-
-## 📸 Screenshot
-
-![FastCamera GUI Screenshot](docs/screenshot.png)
-
-FastCamera GUI with live camera preview, FPS counter, and picture capture functionality.
 
 ---
 
