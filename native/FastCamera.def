@@ -16,6 +16,8 @@ EXPORTS
     Java_fastcamera_FastCamera_nativeHasNewFrame
     Java_fastcamera_FastCamera_nativeLockFrame
     Java_fastcamera_FastCamera_nativeUnlockFrame
+    Java_fastcamera_FastCamera_nativeGetActualWidth
+    Java_fastcamera_FastCamera_nativeGetActualHeight
     
     ; Properties
     Java_fastcamera_FastCamera_nativeSetProperty

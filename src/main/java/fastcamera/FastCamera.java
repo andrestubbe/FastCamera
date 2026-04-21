@@ -27,9 +27,9 @@
  */
 package fastcamera;
 
+import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * @brief Main FastCamera class for high-performance camera capture
@@ -52,9 +52,37 @@ public class FastCamera {
     public static final int FORMAT_MJPEG = 1;       /**< Motion JPEG (compressed) */
     public static final int FORMAT_NV12 = 2;        /**< NV12 planar */
     public static final int FORMAT_RGB24 = 3;       /**< RGB24 (rare) */
+    public static final int FORMAT_BGRA = 4;        /**< BGRA (direct to Java, no conversion) */
     
     static {
-        // Native library loaded by FastCore
+        System.out.println("[DEBUG] FastCamera static initializer");
+        try {
+            // Try multiple methods to load the DLL
+            String[] paths = {
+                "fastcamera",  // loadLibrary
+                "target/classes/fastcamera.dll",
+                "../../../build/fastcamera.dll",
+                "C:/Users/andre/Documents/FastJava/2026-04-21-Work-FastCamera/build/fastcamera.dll"
+            };
+            
+            for (String path : paths) {
+                try {
+                    System.out.println("[DEBUG] Trying to load: " + path);
+                    if (path.endsWith(".dll")) {
+                        System.load(new java.io.File(path).getAbsolutePath());
+                    } else {
+                        System.loadLibrary(path);
+                    }
+                    System.out.println("[DEBUG] Successfully loaded: " + path);
+                    break;
+                } catch (Exception e) {
+                    System.out.println("[DEBUG] Failed: " + e.getMessage());
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("[DEBUG] All load attempts failed: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
     
     private long nativeHandle = 0;
@@ -84,7 +112,12 @@ public class FastCamera {
      * @return List of CameraDevice objects across all backends
      * @note Tries: WinRT → MediaFoundation → DirectShow
      */
-    public static native List<CameraDevice> enumerateDevices();
+    public static List<CameraDevice> enumerateDevices() {
+        CameraDevice[] devices = nativeEnumerateDevices();
+        return devices != null ? java.util.Arrays.asList(devices) : new java.util.ArrayList<>();
+    }
+    
+    private static native CameraDevice[] nativeEnumerateDevices();
     
     /**
      * @brief Open camera by device ID
@@ -139,13 +172,72 @@ public class FastCamera {
      * @note Fastest option - no JNI array copy
      */
     public ByteBuffer startStream(int width, int height, int fps) {
-        this.width = width;
-        this.height = height;
-        streamBuffer = nativeStartStream(nativeHandle, width, height);
+        return startStream(width, height, fps, FORMAT_YUY2);
+    }
+    
+    /**
+     * @brief Start zero-copy streaming with specific format
+     * @param width Frame width
+     * @param height Frame height
+     * @param fps Target framerate
+     * @param format Pixel format (FORMAT_YUY2, FORMAT_NV12, FORMAT_MJPEG)
+     * @return DirectByteBuffer mapped to native frame memory
+     * @note Fastest option - no JNI array copy
+     */
+    public ByteBuffer startStream(int width, int height, int fps, int format) {
+        streamBuffer = nativeStartStream(nativeHandle, width, height, fps, format);
+        // Get actual dimensions (camera may provide different resolution)
+        this.width = nativeGetActualWidth(nativeHandle);
+        this.height = nativeGetActualHeight(nativeHandle);
+        System.out.println("[DEBUG] Camera actual resolution: " + this.width + "x" + this.height);
         return streamBuffer;
     }
     
-    private native ByteBuffer nativeStartStream(long handle, int width, int height);
+    private native ByteBuffer nativeStartStream(long handle, int width, int height, int fps, int format);
+    private native int nativeGetActualWidth(long handle);
+    private native int nativeGetActualHeight(long handle);
+    
+    /**
+     * @brief Get actual width from camera (may differ from requested)
+     * @return Actual frame width
+     */
+    public int getWidth() { return width; }
+    
+    /**
+     * @brief Get actual height from camera (may differ from requested)
+     * @return Actual frame height
+     */
+    public int getHeight() { return height; }
+    
+    /**
+     * @brief Take a picture/snapshot of current camera frame
+     * @return BufferedImage containing the current frame, or null if no frame available
+     */
+    public BufferedImage takePicture() {
+        if (!hasNewFrame()) {
+            return null; // No frame available
+        }
+        
+        lockFrame();
+        try {
+            byte[] frameData = getFrame();
+            if (frameData == null) {
+                return null;
+            }
+            
+            int width = getWidth();
+            int height = getHeight();
+            
+            // Create BufferedImage from frame data (BGR format)
+            BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+            byte[] imagePixels = ((java.awt.image.DataBufferByte)image.getRaster().getDataBuffer()).getData();
+            System.arraycopy(frameData, 0, imagePixels, 0, Math.min(frameData.length, imagePixels.length));
+            
+            return image;
+        } finally {
+            unlockFrame();
+        }
+    }
     
     /**
      * @brief Check if new frame available (for streaming mode)
@@ -178,11 +270,11 @@ public class FastCamera {
     
     /**
      * @brief Get frame (blocking pull model)
-     * @return RGBA byte array or null if no frame
+     * @return BGR byte array or null if no frame
      * @note Blocks until frame available or timeout
      */
     public byte[] getFrame() {
-        byte[] frame = new byte[width * height * 4]; // RGBA
+        byte[] frame = new byte[width * height * 3]; // BGR format
         if (nativeGetFrame(nativeHandle, frame)) {
             return frame;
         }

@@ -167,7 +167,7 @@ JNIEXPORT void JNICALL Java_fastcamera_FastCamera_nativeUnlockFrame
  * @return JNI_TRUE if set
  */
 JNIEXPORT jboolean JNICALL Java_fastcamera_FastCamera_nativeSetProperty
-    (JNIEnv* env, jclass clazz, jlong handle, jint property, jint value, jboolean auto);
+    (JNIEnv* env, jclass clazz, jlong handle, jint property, jint value, jboolean autoMode);
 
 /**
  * @brief Get camera property

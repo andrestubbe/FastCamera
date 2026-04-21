@@ -22,9 +22,16 @@ FastCamera provides **triple-backend camera capture** for Java:
 - **Zero-Copy Streaming** — DirectByteBuffer, no JNI array copy
 - **Format Enumeration** — Query all supported resolutions/formats before opening
 - **Hybrid API** — Pull (blocking) or Push (callback) modes
+- **Picture Capture** — Take snapshots with SPACE key (PNG format)
 - **1080p@60fps** — High performance target
 
-## 📦 Installation
+## � Screenshot
+
+![FastCamera GUI Screenshot](docs/screenshot.png)
+
+FastCamera GUI with live camera preview, FPS counter, and picture capture functionality.
+
+## �� Installation
 
 ### Maven (JitPack)
 
