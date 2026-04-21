@@ -158,6 +158,25 @@ public class FastCamera {
     private native boolean nativeHasNewFrame(long handle);
     
     /**
+     * @brief Lock frame buffer for reading (thread-safe)
+     * @note Always pair with unlockFrame()
+     */
+    public void lockFrame() {
+        nativeLockFrame(nativeHandle);
+    }
+    
+    private native void nativeLockFrame(long handle);
+    
+    /**
+     * @brief Unlock frame buffer after reading
+     */
+    public void unlockFrame() {
+        nativeUnlockFrame(nativeHandle);
+    }
+    
+    private native void nativeUnlockFrame(long handle);
+    
+    /**
      * @brief Get frame (blocking pull model)
      * @return RGBA byte array or null if no frame
      * @note Blocks until frame available or timeout
