@@ -15,6 +15,37 @@ FastCamera provides **triple-backend camera capture** for Java:
 - **WinRT** — Windows 10+ native camera APIs
 - **DirectShow** — Legacy fallback for maximum compatibility
 
+**Keywords:** java camera capture, webcam java, high performance camera, jni camera, mediafoundation java, winrt camera, directshow java, 60fps camera, zero copy camera, fast video capture java, camera streaming java, real-time camera processing, computer vision java, opencv alternative java
+
+---
+
+## About FastCamera
+
+When searching for **Java Camera**, **Java Webcam**, **High Performance Camera Capture**, or **OpenCV Java Alternative**, you typically need one of two things:
+
+**1. A heavy computer vision library** (OpenCV) — 100MB+ dependencies, complex setup, overkill for simple camera capture
+
+**2. Just fast camera access** for your Java application — lightweight, native performance, simple API
+
+FastCamera is **Option 2**:
+
+FastCamera is a **lightweight, native, ultra-fast** camera capture library that provides:
+- **📸 Triple Backend Support** — MediaFoundation, WinRT, and DirectShow with automatic selection
+- **⚡ Hardware Acceleration** — SIMD color conversion, zero-copy streaming, ring buffers
+- **🎯 High Performance** — 30-60fps capture with minimal CPU overhead
+- **🔧 Simple API** — Drop-in replacement for complex camera libraries
+
+Unlike OpenCV or other computer vision frameworks that bundle hundreds of features you don't need, FastCamera focuses on **one thing**: **blazing-fast camera capture** with native Windows performance.
+
+**Perfect for:**
+- **Video conferencing apps** — Real-time camera streaming
+- **Computer vision preprocessing** — Fast frame capture for ML pipelines  
+- **Security systems** — High-FPS surveillance recording
+- **Streaming applications** — Low-latency camera broadcasting
+- **Educational projects** — Simple camera access without complexity
+
+---
+
 ## 🚀 Features
 
 - **Triple Backend** — Auto-selects best available API
