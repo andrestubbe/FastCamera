@@ -1,4 +1,4 @@
-# FastCamera — High-performance camera capture for Java
+# FastCamera — High-performance camera capture for Java [ALPHA]
 
 **⚡ Ultra-fast camera capture for Java — Triple backend (MediaFoundation/WinRT/DirectShow), SIMD acceleration, zero-copy streaming**
 
