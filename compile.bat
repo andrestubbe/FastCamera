@@ -10,7 +10,22 @@ set PROJECT_NAME=fastcamera
 set DLL_NAME=%PROJECT_NAME%.dll
 set JAVA_VERSION=17
 
-:: Find Java
+:: Find Java JDK (not JRE) - force JDK over JRE
+set JAVA_HOME=
+
+:: Check common JDK locations first
+if exist "C:\Program Files\Java\jdk-25" set JAVA_HOME=C:\Program Files\Java\jdk-25
+if not defined JAVA_HOME (
+    if exist "C:\Program Files\Java\jdk-21" set JAVA_HOME=C:\Program Files\Java\jdk-21
+)
+if not defined JAVA_HOME (
+    if exist "C:\Program Files\Java\jdk-17" set JAVA_HOME=C:\Program Files\Java\jdk-17
+)
+if not defined JAVA_HOME (
+    for /d %%d in ("C:\Program Files\Java\jdk*") do set JAVA_HOME=%%d
+)
+
+:: Fallback to javac location if still not found
 if not defined JAVA_HOME (
     for /f "delims=" %%i in ('where javac 2^>nul') do (
         for %%j in ("%%i") do set JAVA_BIN=%%~dpj
@@ -19,7 +34,7 @@ if not defined JAVA_HOME (
 )
 
 if not defined JAVA_HOME (
-    echo ERROR: Java not found. Please set JAVA_HOME.
+    echo ERROR: Java JDK not found. Please install JDK 17+ or set JAVA_HOME.
     exit /b 1
 )
 
@@ -28,12 +43,24 @@ echo Java Home: %JAVA_HOME%
 :: Set paths
 set JNI_INCLUDE=%JAVA_HOME%\include
 set JNI_WIN32=%JAVA_HOME%\include\win32
-set VC_VARS="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
 
-:: Check for Visual Studio
+:: Check for Visual Studio in all possible locations
+set VC_VARS="C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
 if not exist %VC_VARS% (
-    echo ERROR: Visual Studio 2022 not found at expected location.
-    echo Please run this from a Developer Command Prompt.
+    set VC_VARS="C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+)
+if not exist %VC_VARS% (
+    set VC_VARS="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+)
+
+if not exist %VC_VARS% (
+    echo ERROR: Visual Studio 2022 not found at expected locations.
+    echo Searched:
+    echo   - C:\Program Files\Microsoft Visual Studio\2022\Community
+    echo   - C:\Program Files ^(x86^)\Microsoft Visual Studio\2022\Community
+    echo   - C:\Program Files ^(x86^)\Microsoft Visual Studio\2022\BuildTools
+    echo.
+    echo Please run this from a Developer Command Prompt or install VS2022.
     exit /b 1
 )
 
@@ -60,6 +87,7 @@ cl.exe /EHsc /MD /O2 /W3 /GL /Gw /arch:AVX2 ^
     native\%PROJECT_NAME%.cpp ^
     /link ^
     /DLL /MACHINE:X64 /LTCG ^
+    /DEF:native\%PROJECT_NAME%.def ^
     /OUT:build\%DLL_NAME% ^
     mfplat.lib mf.lib mfreadwrite.lib mfuuid.lib ^
     kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib ^
