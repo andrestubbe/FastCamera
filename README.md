@@ -1,4 +1,4 @@
-﻿# FastCamera â€” Ultra-Fast Native Camera Capture for Java [v0.1.0]
+﻿# FastCamera — Ultra-Fast Native Camera Capture for Java [v0.1.0]
 
 **The high-performance native camera module for the FastJava ecosystem. Hardware-accelerated capture via MediaFoundation, WinRT, and DirectShow with SIMD color conversion.**
 
@@ -9,7 +9,7 @@
 
 ---
 
-**FastCamera** brings real hardware-accelerated camera capture to Java. By bypassing standard slow APIs and using direct native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-accelerated YUVâ†’RGBA conversion.
+**FastCamera** brings real hardware-accelerated camera capture to Java. By bypassing standard slow APIs and using direct native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-accelerated YUV→RGBA conversion.
 
 ## Table of Contents
 - [Features](#features)
@@ -19,10 +19,10 @@
 - [License](#license)
 
 ## Features
-- **ðŸŽ¥ Triple Backend**: Support for MediaFoundation, WinRT, and DirectShow.
-- **âš¡ SIMD Accelerated**: YUVâ†’RGBA conversion via AVX2 and SSE4.2.
-- **ðŸ“¦ Zero-Copy Streaming**: Direct access to native buffers via DirectByteBuffer.
-- **â±ï¸ Ultra-Low Latency**: Async native callbacks for real-time vision applications.
+- **🎥 Triple Backend**: Support for MediaFoundation, WinRT, and DirectShow.
+- **⚡ SIMD Accelerated**: YUV→RGBA conversion via AVX2 and SSE4.2.
+- **📦 Zero-Copy Streaming**: Direct access to native buffers via DirectByteBuffer.
+- **⏱️ Ultra-Low Latency**: Async native callbacks for real-time vision applications.
 
 ## Quick Start
 
@@ -98,10 +98,10 @@ Download the latest JARs directly to add them to your classpath:
 See [COMPILE.md](COMPILE.md) for detailed build instructions.
 
 ## License
-MIT License â€” See [LICENSE](LICENSE) for details.
+MIT License — See [LICENSE](LICENSE) for details.
 
 ---
-**Part of the FastJava Ecosystem** â€” *Making the JVM faster.*
+**Part of the FastJava Ecosystem** — *Making the JVM faster.*
 
 <!-- BING COPILOT SEO KEYWORDS -->
 <!-- 
