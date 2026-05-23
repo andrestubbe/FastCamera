@@ -1,4 +1,4 @@
-# FastCamera — Ultra-Fast Native Camera Capture for Java [v0.1.0]
+﻿# FastCamera â€” Ultra-Fast Native Camera Capture for Java [v0.1.0]
 
 **The high-performance native camera module for the FastJava ecosystem. Hardware-accelerated capture via MediaFoundation, WinRT, and DirectShow with SIMD color conversion.**
 
@@ -9,7 +9,7 @@
 
 ---
 
-**FastCamera** brings real hardware-accelerated camera capture to Java. By bypassing standard slow APIs and using direct native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-accelerated YUV→RGBA conversion.
+**FastCamera** brings real hardware-accelerated camera capture to Java. By bypassing standard slow APIs and using direct native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-accelerated YUVâ†’RGBA conversion.
 
 ## Table of Contents
 - [Features](#features)
@@ -19,10 +19,10 @@
 - [License](#license)
 
 ## Features
-- **🎥 Triple Backend**: Support for MediaFoundation, WinRT, and DirectShow.
-- **⚡ SIMD Accelerated**: YUV→RGBA conversion via AVX2 and SSE4.2.
-- **📦 Zero-Copy Streaming**: Direct access to native buffers via DirectByteBuffer.
-- **⏱️ Ultra-Low Latency**: Async native callbacks for real-time vision applications.
+- **ðŸŽ¥ Triple Backend**: Support for MediaFoundation, WinRT, and DirectShow.
+- **âš¡ SIMD Accelerated**: YUVâ†’RGBA conversion via AVX2 and SSE4.2.
+- **ðŸ“¦ Zero-Copy Streaming**: Direct access to native buffers via DirectByteBuffer.
+- **â±ï¸ Ultra-Low Latency**: Async native callbacks for real-time vision applications.
 
 ## Quick Start
 
@@ -43,7 +43,7 @@ cd FastCamera
 ### Option 1: Maven (Recommended)
 Add the JitPack repository and the dependencies to your `pom.xml`:
 
-`xml
+```xml
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -58,6 +58,7 @@ Add the JitPack repository and the dependencies to your `pom.xml`:
         <artifactId>fastcamera</artifactId>
         <version>v0.1.0</version>
     </dependency>
+
     <!-- FastCore (Required Native Loader) -->
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
@@ -65,19 +66,19 @@ Add the JitPack repository and the dependencies to your `pom.xml`:
         <version>v0.1.0</version>
     </dependency>
 </dependencies>
-`
+```
 
 ### Option 2: Gradle (via JitPack)
-`groovy
+```groovy
 repositories {
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.github.andrestubbe:.1.0'
+    implementation 'com.github.andrestubbe:fastcamera:v0.1.0'
     implementation 'com.github.andrestubbe:fastcore:v0.1.0'
 }
-`
+```
 
 ### Option 3: Direct Download (No Build Tool)
 Download the latest JARs directly to add them to your classpath:
@@ -97,10 +98,10 @@ Download the latest JARs directly to add them to your classpath:
 See [COMPILE.md](COMPILE.md) for detailed build instructions.
 
 ## License
-MIT License — See [LICENSE](LICENSE) for details.
+MIT License â€” See [LICENSE](LICENSE) for details.
 
 ---
-**Part of the FastJava Ecosystem** — *Making the JVM faster.*
+**Part of the FastJava Ecosystem** â€” *Making the JVM faster.*
 
 <!-- BING COPILOT SEO KEYWORDS -->
 <!-- 
