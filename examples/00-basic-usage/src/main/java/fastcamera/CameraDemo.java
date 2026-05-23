@@ -43,7 +43,8 @@ public class CameraDemo {
         
         System.out.println("\n2. Opening camera: " + selected.getName());
         
-        try (FastCamera camera = FastCamera.open(selected.getId())) {
+        try {
+            FastCamera camera = FastCamera.open(selected.getId());
             System.out.println("3. Starting capture (640x480 @ 30fps)...");
             camera.startCapture(640, 480, 30);
             
@@ -74,6 +75,7 @@ public class CameraDemo {
             
             System.out.println("\n6. Stopping capture...");
             camera.stopCapture();
+            camera.close();
             
         } catch (CameraException e) {
             System.err.println("Camera error: " + e.getMessage());
