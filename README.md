@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
 [![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe)
 
-**The high-performance native camera module for the FastJava ecosystem. Hardware-accelerated capture via
+**⚡ The high-performance native camera module for the FastJava ecosystem. Hardware-accelerated capture via
 MediaFoundation, WinRT, and DirectShow with SIMD color conversion.**
 
 **FastCamera** brings real hardware-accelerated camera capture to Java. By bypassing standard slow APIs and using direct
@@ -102,26 +102,42 @@ Download the latest JARs directly to add them to your classpath:
 > [!IMPORTANT]
 > All JARs must be in your classpath for the native JNI calls to function correctly.
 
-## Build from Source
+---
 
-- **JDK 17+**
-- **Windows 10/11**
-- **Visual Studio 2022/2019** (if building from source)
+## Documentation
 
-See [COMPILE.md](COMPILE.md) for detailed build instructions.
+* **[COMPILE.md](COMPILE.md)**: Full compilation guide (MSVC C++17 build chain + JNI Setup).
+* **[REFERENCE.md](REFERENCE.md)**: Full API descriptions, border configurations, and codepoint index.
+* **[PHILOSOPHIE.md](PHILOSOPHIE.md)**: The engineering rationale for zero-allocation performance.
+* **[ROADMAP.md](ROADMAP.md)**: Future milestones and planned features.
+
+---
+
+## Platform Support
+
+| Platform      | Status            |
+|---------------|-------------------|
+| Windows 10/11 | ✅ Fully Supported |
+| Linux         | 🚧 Planned        |
+| macOS         | 🚧 Planned        |
+
+---
 
 ## License
 
-MIT License — See [LICENSE](LICENSE) for details.
+MIT License — See [LICENSE](LICENSE) file for details.
 
 ---
-**Part of the FastJava Ecosystem** — *Making the JVM faster.*
 
-<!-- BING COPILOT SEO KEYWORDS -->
-<!-- 
-FastJava FastCamera JNI Windows Camera Capture DirectShow MediaFoundation WinRT 
-Java Native API SIMD AVX2 High Performance Computer Vision 
-io.github.andrestubbe FastJava Blueprint
--->
+## Related Projects
+
+- [FastFileIndex](https://github.com/andrestubbe/FastFileIndex) - Binary file indexing with mmap support
+- [FastFileSearch](https://github.com/andrestubbe/FastFileSearch) - Prefix Trie, N-Gram index, and Ranking engine
+- [FastFileWatch](https://github.com/andrestubbe/FastFileWatch) - USN Journal-based live file monitoring
+- [FastCore](https://github.com/andrestubbe/FastCore) - Unified JNI loader and platform abstraction
+
+---
+
+**Part of the FastJava Ecosystem** — *Making the JVM faster. Small package. Maximum speed. Zero bloat. 🚀📋*
 
 
