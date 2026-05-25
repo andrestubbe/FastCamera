@@ -24,12 +24,16 @@ native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-ac
 - [Build from Source](#build-from-source)
 - [License](#license)
 
+---
+
 ## Features
 
 - **🎥 Triple Backend**: Support for MediaFoundation, WinRT, and DirectShow.
 - **⚡ SIMD Accelerated**: YUV→RGBA conversion via AVX2 and SSE4.2.
 - **📦 Zero-Copy Streaming**: Direct access to native buffers via DirectByteBuffer.
 - **⏱️ Ultra-Low Latency**: Async native callbacks for real-time vision applications.
+
+---
 
 ## Quick Start
 
@@ -44,6 +48,8 @@ cd FastCamera
 # Launch the CameraDemo
 .\run-demo.bat
 ```
+
+---
 
 ## Installation
 
@@ -98,9 +104,6 @@ Download the latest JARs directly to add them to your classpath:
    ** (The Core Library)
 2. ⚙️ **[fastcore-v0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/v0.1.0/fastcore-v0.1.0.jar)** (
    The Mandatory Native Loader)
-
-> [!IMPORTANT]
-> All JARs must be in your classpath for the native JNI calls to function correctly.
 
 ---
 
