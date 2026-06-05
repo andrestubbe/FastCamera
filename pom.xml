@@ -42,6 +42,13 @@
         <url>https://github.com/andrestubbe/fastcamera/tree/main</url>
     </scm>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- JUnit 5 for testing -->
         <dependency>
