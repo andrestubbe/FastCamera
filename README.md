@@ -1,6 +1,6 @@
-# FastCamera v0.1.0 [ALPHA] � Ultra-Fast Native Camera Capture for Java
+# FastCamera 0.1.0 [ALPHA]  Ultra-Fast Native Camera Capture for Java
 
-[![Status](https://img.shields.io/badge/status-v0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastCamera/releases/tag/v0.1.0)
+[![Status](https://img.shields.io/badge/status-0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastCamera/releases/tag/0.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
@@ -32,10 +32,10 @@ native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-ac
 
 ## Features
 
-- **?? Triple Backend**: Support for MediaFoundation, WinRT, and DirectShow.
+- **ðŸš€ Triple Backend**: Support for MediaFoundation, WinRT, and DirectShow.
 - **? SIMD Accelerated**: YUV?RGBA conversion via AVX2 and SSE4.2.
-- **?? Zero-Copy Streaming**: Direct access to native buffers via DirectByteBuffer.
-- **?? Ultra-Low Latency**: Async native callbacks for real-time vision applications.
+- **ðŸš€ Zero-Copy Streaming**: Direct access to native buffers via DirectByteBuffer.
+- **?âš¡ Ultra-Low Latency**: Async native callbacks for real-time vision applications.
 
 ---
 
@@ -75,14 +75,14 @@ Add the JitPack repository and the dependencies to your `pom.xml`:
 <dependency>
     <groupId>com.github.andrestubbe</groupId>
     <artifactId>fastcamera</artifactId>
-    <version>v0.1.0</version>
+    <version>0.1.0</version>
 </dependency>
 
 <!-- FastCore (Required Native Loader) -->
 <dependency>
     <groupId>com.github.andrestubbe</groupId>
     <artifactId>fastcore</artifactId>
-    <version>v0.1.0</version>
+    <version>0.1.0</version>
 </dependency>
 </dependencies>
 ```
@@ -95,8 +95,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.andrestubbe:fastcamera:v0.1.0'
-    implementation 'com.github.andrestubbe:fastcore:v0.1.0'
+    implementation 'com.github.andrestubbe:fastcamera:0.1.0'
+    implementation 'com.github.andrestubbe:fastcore:0.1.0'
 }
 ```
 
@@ -104,9 +104,9 @@ dependencies {
 
 Download the latest JARs directly to add them to your classpath:
 
-1. ?? **[fastcamera-v0.1.0.jar](https://github.com/andrestubbe/FastCamera/releases/download/v0.1.0/fastcamera-v0.1.0.jar)
+1. ðŸš€ **[fastcamera-0.1.0.jar](https://github.com/andrestubbe/FastCamera/releases/download/0.1.0/fastcamera-0.1.0.jar)
    ** (The Core Library)
-2. ?? **[fastcore-v0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/v0.1.0/fastcore-v0.1.0.jar)** (
+2. ðŸš€ **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (
    The Mandatory Native Loader)
 
 ---
@@ -125,14 +125,14 @@ Download the latest JARs directly to add them to your classpath:
 | Platform      | Status            |
 |---------------|-------------------|
 | Windows 10/11 | ? Fully Supported |
-| Linux         | ?? Planned        |
-| macOS         | ?? Planned        |
+| Linux         | ðŸš€ Planned        |
+| macOS         | ðŸš€ Planned        |
 
 ---
 
 ## License
 
-MIT License � See [LICENSE](LICENSE) file for details.
+MIT License  See [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -145,6 +145,6 @@ MIT License � See [LICENSE](LICENSE) file for details.
 
 ---
 
-**Part of the FastJava Ecosystem** � *Making the JVM faster. Small package. Maximum speed. Zero bloat. ????*
+**Part of the FastJava Ecosystem**  *Making the JVM faster. Small package. Maximum speed. Zero bloat. ðŸš€ðŸš€*
 
 
