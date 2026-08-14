@@ -20,6 +20,24 @@ native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-ac
 
 ---
 
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/andrestubbe/FastCamera.git
+
+# Build the native bridge
+cd FastCamera
+.\compile.bat
+
+# Launch the CameraDemo
+.\run-demo.bat
+```
+
+---
+
+---
+
 ## Table of Contents
 
 - [Features](#features)
@@ -39,21 +57,6 @@ native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-ac
 
 ---
 
-## Quick Start
-
-```bash
-# Clone the repository
-git clone https://github.com/andrestubbe/FastCamera.git
-
-# Build the native bridge
-cd FastCamera
-.\compile.bat
-
-# Launch the CameraDemo
-.\run-demo.bat
-```
-
----
 
 ## Installation
 
