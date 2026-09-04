@@ -1,6 +1,6 @@
-# FastCamera 0.1.0 [ALPHA-2026-05-17] — Ultra-Fast Native Camera Capture for Java
+# FastCamera 0.1.1 [ALPHA-2026-05-17] — Ultra-Fast Native Camera Capture for Java
 
-[![Status](https://img.shields.io/badge/status-0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastCamera/releases/tag/0.1.0)
+[![Status](https://img.shields.io/badge/status-0.1.1-brightgreen.svg)](https://github.com/andrestubbe/FastCamera/releases/tag/0.1.1)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
@@ -74,19 +74,26 @@ Add the JitPack repository and the dependencies to your `pom.xml`:
 </repositories>
 
 <dependencies>
-<!-- FastCamera Library -->
-<dependency>
-    <groupId>com.github.andrestubbe</groupId>
-    <artifactId>fastcamera</artifactId>
-    <version>0.1.0</version>
-</dependency>
+    <!-- FastCamera Library -->
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>FastCamera</artifactId>
+        <version>0.1.1</version>
+    </dependency>
 
-<!-- FastCore (Required Native Loader) -->
-<dependency>
-    <groupId>com.github.andrestubbe</groupId>
-    <artifactId>fastcore</artifactId>
-    <version>0.1.0</version>
-</dependency>
+    <!-- FastImage Frame Bridge -->
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>FastImage</artifactId>
+        <version>0.1.2</version>
+    </dependency>
+
+    <!-- FastCore (Required Native Loader) -->
+    <dependency>
+        <groupId>com.github.andrestubbe</groupId>
+        <artifactId>FastCore</artifactId>
+        <version>0.1.0</version>
+    </dependency>
 </dependencies>
 ```
 
@@ -98,8 +105,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.andrestubbe:fastcamera:0.1.0'
-    implementation 'com.github.andrestubbe:fastcore:0.1.0'
+    implementation 'com.github.andrestubbe:FastCamera:0.1.1'
+    implementation 'com.github.andrestubbe:FastImage:0.1.2'
+    implementation 'com.github.andrestubbe:FastCore:0.1.0'
 }
 ```
 
@@ -107,8 +115,9 @@ dependencies {
 
 Download the latest JARs directly to add them to your classpath:
 
-1. 📦 **[fastcamera-0.1.0.jar](https://github.com/andrestubbe/FastCamera/releases/download/0.1.0/fastcamera-0.1.0.jar)** (The Core Library)
-2. ⚙️ **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (The Mandatory Native Loader)
+1. 📦 **[FastCamera-0.1.1.jar](https://github.com/andrestubbe/FastCamera/releases/tag/0.1.1)** (The Core Library)
+2. ⚡ **[FastImage-0.1.2.jar](https://github.com/andrestubbe/FastImage/releases/tag/0.1.2)** (The SIMD Image Engine)
+3. ⚙️ **[FastCore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/tag/0.1.0)** (The Mandatory Native Loader)
 
 ---
 
