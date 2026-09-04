@@ -27,6 +27,7 @@
  */
 package fastcamera;
 
+import fastimage.FastImage;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.util.List;
@@ -237,6 +238,32 @@ public class FastCamera {
         } finally {
             unlockFrame();
         }
+    }
+
+    /**
+     * @brief Take a snapshot as a SIMD-accelerated FastImage
+     * @return FastImage containing current frame, or null if no frame available
+     */
+    public FastImage captureImage() {
+        if (streamBuffer != null && streamBuffer.isDirect()) {
+            return FastImage.wrap(streamBuffer, width, height);
+        }
+        BufferedImage bi = takePicture();
+        if (bi == null) {
+            return null;
+        }
+        return FastImage.fromBufferedImage(bi);
+    }
+
+    /**
+     * @brief ZERO-COPY: Wrap active streaming buffer in a FastImage instance
+     * @return FastImage wrapping current frame memory, or null if streaming not active
+     */
+    public FastImage getStreamImage() {
+        if (streamBuffer == null || !streamBuffer.isDirect() || width <= 0 || height <= 0) {
+            return null;
+        }
+        return FastImage.wrap(streamBuffer, width, height);
     }
     
     /**
