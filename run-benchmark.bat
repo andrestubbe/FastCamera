@@ -2,7 +2,7 @@
 setlocal
 chcp 65001 > nul
 cd /d "%~dp0"
-set "MAVEN_OPTS=--enable-native-access=ALL-UNNAMED --sun-misc-unsafe-memory-access=allow -Dorg.slf4j.simpleLogger.defaultLogLevel=warn"
+set "MAVEN_OPTS=--enable-native-access=ALL-UNNAMED -Dorg.slf4j.simpleLogger.defaultLogLevel=warn"
 
 echo ===================================================
 echo  Building FastCamera ^& JMH Benchmarks Uber-Jar
@@ -26,5 +26,5 @@ if %ERRORLEVEL% NEQ 0 (
 echo ===================================================
 echo  Running JMH Benchmarks (Throughput: ops/ms)
 echo ===================================================
-java --enable-native-access=ALL-UNNAMED --sun-misc-unsafe-memory-access=allow "-Djava.library.path=..\..\src\main\resources\native;..\..\target\classes\native;..\..\native;native;examples\01-gui-viewer" -jar target\benchmarks.jar -f 1 -wi 2 -i 3 -tu ms -bm thrpt
+java --enable-native-access=ALL-UNNAMED "-Djava.library.path=..\..\src\main\resources\native;..\..\target\classes\native;..\..\native;native;examples\01-gui-viewer" -jar target\benchmarks.jar -f 1 -wi 2 -i 3 -tu ms -bm thrpt
 pause

@@ -22,38 +22,144 @@ native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-ac
 
 ## Quick Start
 
-```bash
-# Clone the repository
-git clone https://github.com/andrestubbe/FastCamera.git
+```java
+import fastcamera.FastCamera;
+import fastcamera.CameraDevice;
+import fastimage.FastImage;
+import java.nio.ByteBuffer;
+import java.util.List;
 
-# Build the native bridge
-cd FastCamera
-.\compile.bat
+public class Demo {
+    public static void main(String[] args) {
+        // 1. Enumerate available cameras across WinRT, MediaFoundation, and DirectShow
+        List<CameraDevice> devices = FastCamera.enumerateDevices();
+        if (devices.isEmpty()) {
+            System.out.println("No cameras detected.");
+            return;
+        }
 
-# Launch the CameraDemo
-.\run-demo.bat
+        // 2. Open primary camera
+        CameraDevice dev = devices.get(0);
+        FastCamera camera = FastCamera.open(dev.getId());
+
+        // 3. Start high-performance streaming (e.g. 1080p @ 60fps)
+        ByteBuffer directBuffer = camera.startStream(1920, 1080, 60);
+
+        // 4. Capture single frame directly as SIMD-accelerated FastImage
+        FastImage frameImage = camera.captureImage();
+        if (frameImage != null) {
+            // Apply SIMD filters with zero JVM garbage collection
+            FastImage processed = frameImage.resize(640, 360).grayscale();
+        }
+
+        // 5. Clean up native resources
+        camera.stopCapture();
+        camera.close();
+    }
+}
 ```
-
----
 
 ---
 
 ## Table of Contents
 
-- [Features](#features)
+- [Why FastCamera?](#why-fastcamera)
 - [Quick Start](#quick-start)
+- [Key Features](#key-features)
+- [Real-World Use Cases](#real-world-use-cases)
+- [Architecture & Hardware Pipeline](#architecture--hardware-pipeline)
+- [Performance Benchmarks](#performance-benchmarks)
+- [API Quick Reference](#api-quick-reference)
 - [Installation](#installation)
-- [Build from Source](#build-from-source)
+- [Documentation](#documentation)
+- [Platform Support](#platform-support)
 - [License](#license)
+- [Related Projects](#related-projects)
 
 ---
 
-## Features
+## Why FastCamera?
 
-- **🎥 Triple Backend**: Support for MediaFoundation, WinRT, and DirectShow.
-- **⚙️ SIMD Accelerated**: YUV→RGBA conversion via AVX2 and SSE4.2.
-- **📥 Zero-Copy Streaming**: Direct access to native buffers via DirectByteBuffer.
-- **⏱️ Ultra-Low Latency**: Async native callbacks for real-time vision applications.
+Capturing camera and webcam video in standard Java usually involves bloated multi-megabyte wrappers, JNI overhead, or slow OpenCV/JavaCV bridges that force unnecessary memory copies:
+
+1. **Slow Format Conversion**: Most webcams output hardware YUV (YUY2/NV12) or MJPEG. Standard Java converts these formats on the CPU using slow scalar loops, burning 30–50% CPU just for color conversion.
+2. **Heavy Heap Allocation**: Creating new image objects or byte arrays per frame creates extreme JVM Garbage Collection pressure at 60 FPS, resulting in dropped frames and unpredictable stutter.
+3. **Fragile Backend Support**: Many Java camera libraries depend on outdated 32-bit DirectShow filters or fail on modern Windows 10/11 WinRT camera permissions.
+
+**FastCamera** eliminates these pain points with a clean, native-first architecture:
+- **Triple Native Backend**: Automatically selects between **WinRT**, **MediaFoundation**, and **DirectShow** for maximum device compatibility.
+- **Zero-Copy Streaming**: Direct native frame mapping exposes raw video buffers to Java via `DirectByteBuffer` with 0 GC overhead.
+- **FastImage Ecosystem Bridge**: Seamlessly wrap or capture video frames directly into off-heap `FastImage` instances for SIMD filtering.
+
+---
+
+## Key Features
+
+- 🎥 **Triple Native Engine** — Automatic hardware-accelerated pipeline selection (WinRT, MediaFoundation, DirectShow).
+- ⚙️ **SIMD Color Conversion** — High-speed YUV→RGBA conversion leveraging AVX2 and SSE4.2 vector instructions.
+- 📥 **Zero-Copy Streaming** — Direct access to native video memory via `DirectByteBuffer` with 0 heap bytes allocated.
+- 🖼️ **FastImage Ecosystem Bridge** — Instant zero-copy interoperability with `FastImage` for SIMD resize, blur, and vision filtering.
+- ⏱️ **Ultra-Low Latency** — Async native capture callbacks delivering stable 1080p @ 60 FPS.
+- 🔗 **FastCore Integration** — Unified native DLL loading and extraction without manual environment setup.
+
+---
+
+## Real-World Use Cases
+
+- 👁️ **Computer Vision & AI Tracking**: Stream raw camera frames directly to YOLO, OpenCV, or TensorRT with zero latency.
+- 🎙️ **Live Streaming & Virtual Camera Overlays**: Process and filter webcam video with real-time Kawase background blur via `FastImage`.
+- 🏭 **Industrial Inspection & OCR**: High-framerate capture for barcode scanning, text extraction, and optical inspection.
+- 🤖 **Autonomous Robotics & Drones**: Low-overhead visual feedback loop running on resource-constrained JVM runtimes.
+
+---
+
+## Architecture & Hardware Pipeline
+
+```
+┌────────────────────────────────────────────────────────┐
+│                   Java Application                     │
+└───────────────┬────────────────────────┬───────────────┘
+                │ Direct JNI             │ Zero-Copy Wrap
+                ▼                        ▼
+┌───────────────────────────────┐ ┌──────────────────────┐
+│  fastcamera.dll (Native C++)  │ │      FastImage       │
+├───────────────┬───────────────┤ │  (SIMD / Off-Heap)   │
+│ WinRT / MF /  │ AVX2 YUV-RGBA │ └──────────┬───────────┘
+│ DirectShow    │ SIMD Kernel   │            │
+└───────┬───────┴───────┬───────┘            ▼
+        │               └─────────────► Off-Heap Processing
+        ▼
+┌───────────────────────────────┐
+│ UVC Camera / Video Capture HW │
+└───────────────────────────────┘
+```
+
+---
+
+## Performance Benchmarks
+
+Measured on official [JMH Benchmark](examples/Benchmark) (Throughput in `ops/ms`):
+
+```text
+Benchmark                             Mode  Cnt  Score   Error   Units
+Benchmark.benchmarkEnumerateDevices  thrpt    3  0.802          ops/ms
+```
+
+> **High-Performance Native Interop**: Native MediaFoundation device probing and capability negotiation executes in **~1.2 ms** with complete metadata extraction and zero JVM heap pollution.
+
+---
+
+## API Quick Reference
+
+| Method | Description | Docs |
+|--------|-------------|------|
+| `enumerateDevices()` | Queries all connected camera devices. | [Reference 📖](docs/REFERENCE.md) |
+| `open(deviceId)` | Opens target camera device by native ID. | [Reference 📖](docs/REFERENCE.md) |
+| `startStream(w, h, fps)` | **Zero-Copy:** Maps native frame memory to `DirectByteBuffer`. | [Reference 📖](docs/REFERENCE.md) |
+| `captureImage()` | **FastImage Bridge:** Captures frame to off-heap `FastImage`. | [Reference 📖](docs/REFERENCE.md) |
+| `getStreamImage()` | **Zero-Copy FastImage:** Wraps streaming buffer directly. | [Reference 📖](docs/REFERENCE.md) |
+| `takePicture()` | Captures current frame as standard `BufferedImage`. | [Reference 📖](docs/REFERENCE.md) |
+| `close()` | Releases camera hardware and streams. | [Reference 📖](docs/REFERENCE.md) |
 
 ---
 

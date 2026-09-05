@@ -2,10 +2,13 @@
 
 **Vision:** To provide the fastest possible native primitives for camera access by aggressively bypassing bottlenecks in standard Java.
 
-## 🟢 v0.1.0: Initial Release (Current)
-- [x] **Core Native Engine**: Basic JNI implementation.
+## 🟢 v0.1.0: Initial Release (Completed)
+- [x] **Core Native Engine**: DirectShow, MediaFoundation, and WinRT JNI implementation.
 - [x] **Blueprint Standards**: README, Reference, and Philosophy integration.
-- [ ] **Basic Performance Suite**: Initial benchmarks vs standard Java.
+
+## 🟢 v0.1.1: FastImage Interop & Modern Toolchain (Current)
+- [x] **FastImage Ecosystem Integration**: Direct `captureImage()` and zero-copy `getStreamImage()` bridge.
+- [x] **JMH Benchmark Suite**: Official comparative benchmark suite.
 
 ## 🟡 v0.2.0: Optimization Phase
 - [ ] **SIMD Acceleration**: Implement AVX2/SSE4.2 paths for core loops.
