@@ -1,28 +1,53 @@
-# Building FastCamera
+# Building FastCamera 🛠️
+
+Complete build guide for compiling the native C++ MediaFoundation/WinRT/DirectShow camera capture engine and packaging the Java JAR.
+
+---
 
 ## Prerequisites
 
-- Windows 7 or later
-- Java JDK 17+
-- Apache Maven 3.9+
-- Visual Studio 2022 (C++ workload)
+* **Windows 10 or 11 (64-bit)**
+* **JDK 17+** ([Eclipse Adoptium](https://adoptium.net/) or [Oracle JDK](https://www.oracle.com/java/technologies/downloads/))
+* **Visual Studio 2022 or 2026** (Community, Professional, or Enterprise) with "Desktop development with C++" workload
+* **Windows 10/11 SDK** (installed with Visual Studio)
+* **Maven 3.9+**
 
-## Quick Build
+---
 
-```batch
-# Clone repository
-git clone https://github.com/andrestubbe/fastcamera.git
-cd fastcamera
+## Automated One-Click Build
 
-# Build native DLL (requires Visual Studio)
+FastCamera includes an automated compilation script with Visual Studio and JDK discovery:
+
+```cmd
+# In the FastCamera repository root:
 compile.bat
+```
 
-# Build Java library
-mvn clean package
+What `compile.bat` does automatically:
+1. Detects Visual Studio 2026 / 2022 Community via `vswhere.exe`.
+2. Initializes the 64-bit developer environment (`vcvars64.bat`).
+3. Compiles `native/FastCamera.cpp` with AVX2 SIMD flags and links MediaFoundation libraries (`mfplat.lib`, `mf.lib`, `mfreadwrite.lib`, `mfuuid.lib`).
+4. Deploys `fastcamera.dll` directly to:
+   - `build/fastcamera.dll`
+   - `src/main/resources/native/fastcamera.dll`
+   - `%USERPROFILE%\.fastcore\native\fastcamera\fastcamera.dll`
 
-# Run demo
-cd examples/00-basic-usage
-mvn compile exec:java
+---
+
+## Maven Java Packaging
+
+```bash
+mvn clean install -DskipTests
+```
+
+---
+
+## JMH Benchmarking
+
+To build and execute the official JMH benchmark suite:
+
+```cmd
+run-benchmark.bat
 ```
 
 ## Native Build Details
