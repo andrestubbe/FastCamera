@@ -67,7 +67,7 @@ public class Demo {
 - [Quick Start](#quick-start)
 - [Key Features](#key-features)
 - [Real-World Use Cases](#real-world-use-cases)
-- [Architecture & Hardware Pipeline](#architecture--hardware-pipeline)
+- [Architecture & Pipeline](#architecture--pipeline)
 - [Performance Benchmarks](#performance-benchmarks)
 - [API Quick Reference](#api-quick-reference)
 - [Installation](#installation)
@@ -113,25 +113,28 @@ Capturing camera and webcam video in standard Java usually involves bloated mult
 
 ---
 
-## Architecture & Hardware Pipeline
+## Architecture & Pipeline
 
 ```
-┌────────────────────────────────────────────────────────┐
-│                   Java Application                     │
-└───────────────┬────────────────────────┬───────────────┘
-                │ Direct JNI             │ Zero-Copy Wrap
-                ▼                        ▼
-┌───────────────────────────────┐ ┌──────────────────────┐
-│  fastcamera.dll (Native C++)  │ │      FastImage       │
-├───────────────┬───────────────┤ │  (SIMD / Off-Heap)   │
-│ WinRT / MF /  │ AVX2 YUV-RGBA │ └──────────┬───────────┘
-│ DirectShow    │ SIMD Kernel   │            │
-└───────┬───────┴───────┬───────┘            ▼
-        │               └─────────────► Off-Heap Processing
-        ▼
-┌───────────────────────────────┐
-│ UVC Camera / Video Capture HW │
-└───────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│            Physical Camera Hardware / UVC Webcam            │
+└──────────────────────────────┬──────────────────────────────┘
+                               │ Native OS Subsystems (WinRT / MF / DirectShow)
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│               Hardware YUV Stream (YUY2 / NV12)             │
+└──────────────────────────────┬──────────────────────────────┘
+                               │ Hand-Tuned AVX2 / SSE4.2 SIMD Kernels
+                               │ (Hardware-Accelerated Color Conversion)
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 Native Pre-Allocated Frame Pool             │
+└──────────────────────────────┬──────────────────────────────┘
+                               │ Zero-Copy Direct JNI
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│       Java Application (Direct ByteBuffer / FastImage)      │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ---
