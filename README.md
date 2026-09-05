@@ -148,7 +148,8 @@ Benchmark                             Mode  Cnt  Score   Error   Units
 Benchmark.benchmarkEnumerateDevices  thrpt    3  0.802          ops/ms
 ```
 
-> **High-Performance Native Interop**: Native MediaFoundation device probing and capability negotiation executes in **~1.2 ms** with complete metadata extraction and zero JVM heap pollution.
+> [!NOTE]
+> **Environment & Setup**: Measured on an Intel Core i7 with Windows 11. Native MediaFoundation device probing and capability negotiation executes in **~1.2 ms** with complete metadata extraction and zero JVM heap pollution.
 
 ---
 
