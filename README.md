@@ -14,7 +14,7 @@ MediaFoundation, WinRT, and DirectShow with SIMD color conversion.**
 **FastCamera** brings real hardware-accelerated camera capture to Java. By bypassing standard slow APIs and using direct
 native pipelines, it achieves ultra-low latency 1080p@60fps capture with SIMD-accelerated YUV→RGBA conversion.
 
----
+[**Watch GPU Demo (YouTube)**](https://www.youtube.com/watch?v=BZsqQl7WqWk) | Watch the JMH Benchmark
 
 [![FastFileIndex Showcase](docs/screenshot.png)](https://www.youtube.com/watch?v=BZsqQl7WqWk)
 
