@@ -5,7 +5,7 @@ package fastcamera;
 
 import java.util.List;
 
-public class CameraDemo {
+public class Demo {
     public static void main(String[] args) {
         System.out.println("FastCamera Demo");
         System.out.println("===============");

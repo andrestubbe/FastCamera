@@ -179,7 +179,7 @@ Benchmark.benchmarkEnumerateDevices  thrpt    3  0.802          ops/ms
 
 | Case | Java Example | Launcher | Description |
 |:---|:---|:---|:---|
-| **Interactive Showcase Demo** | [CameraDemo.java](examples/00-basic-usage/src/main/java/fastcamera/CameraDemo.java) | `run-demo.bat` | End-to-end interactive demonstration of webcam device capture, hardware format conversion, and frame streaming. |
+| **Interactive Showcase Demo** | [Demo.java](examples/00-basic-usage/src/main/java/fastcamera/Demo.java) | `run-demo.bat` | End-to-end interactive demonstration of webcam device capture, hardware format conversion, and frame streaming. |
 | **JMH Microbenchmark Suite** | [Benchmark.java](examples/Benchmark/src/main/java/fastcamera/benchmark/Benchmark.java) | `run-benchmark.bat` | Formal OpenJDK JMH throughput measurements across native camera capture engines. |
 
 ---
