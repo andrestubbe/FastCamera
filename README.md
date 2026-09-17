@@ -70,6 +70,7 @@ public class Demo {
 - [Architecture & Pipeline](#architecture--pipeline)
 - [Performance Benchmarks](#performance-benchmarks)
 - [API Quick Reference](#api-quick-reference)
+- [Technical Demos & Benchmarks](#technical-demos--benchmarks)
 - [Installation](#installation)
 - [Documentation](#documentation)
 - [Platform Support](#platform-support)
@@ -174,6 +175,14 @@ Benchmark.benchmarkEnumerateDevices  thrpt    3  0.802          ops/ms
 
 ---
 
+## Technical Demos & Benchmarks
+
+| Case | Java Example | Launcher | Description |
+|:---|:---|:---|:---|
+| **Interactive Showcase Demo** | [CameraDemo.java](examples/00-basic-usage/src/main/java/fastcamera/CameraDemo.java) | `run-demo.bat` | End-to-end interactive demonstration of webcam device capture, hardware format conversion, and frame streaming. |
+| **JMH Microbenchmark Suite** | [Benchmark.java](examples/Benchmark/src/main/java/fastcamera/benchmark/Benchmark.java) | `run-benchmark.bat` | Formal OpenJDK JMH throughput measurements across native camera capture engines. |
+
+---
 
 ## Installation
 
