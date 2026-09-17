@@ -91,6 +91,13 @@ Capturing camera and webcam video in standard Java usually involves bloated mult
 - **Zero-Copy Streaming**: Direct native frame mapping exposes raw video buffers to Java via `DirectByteBuffer` with 0 GC overhead.
 - **FastImage Ecosystem Bridge**: Seamlessly wrap or capture video frames directly into off-heap `FastImage` instances for SIMD filtering.
 
+| Feature | JavaCV / OpenCV | Webcam-Capture (Sarxos) | FastCamera |
+|:---|:---|:---|:---|
+| **Native Backends** | Generic FFmpeg/OpenCV | Legacy DirectShow / V4L4J | **WinRT + MediaFoundation + DirectShow** |
+| **Color Conversion** | Scalar Mat loops / CPU copies | Pure Java BufferedImage | **AVX2 SIMD YUV→RGBA (< 0.2 ms)** |
+| **Frame Delivery** | Native C++ Mat clone | `byte[]` clone per frame | **Zero-Copy DirectByteBuffer / FastImage** |
+| **Heap / GC Overhead**| High (`byte[]` / Mat wrappers) | Severe GC churn at 60 FPS | **Zero GC hot path** |
+
 ---
 
 ## Key Features
